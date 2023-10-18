@@ -15,3 +15,26 @@ function renderBooks(books) {
 document.addEventListener('DOMContentLoaded', function() {
   fetchBooks();
 });
+
+
+function fetchBooks() {
+  // Fetch books from the Game of Thrones API
+  return fetch('https://anapioficeandfire.com/api/books')
+    .then((response) => response.json())
+    .then((data) => renderBooks(data));
+}
+
+function renderBooks(books) {
+  const booksList = document.getElementById('books');
+
+  books.forEach((book) => {
+    const listItem = document.createElement('li');
+    listItem.textContent = book.name;
+    booksList.appendChild(listItem);
+  });
+}
+
+// Call fetchBooks when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+  fetchBooks();
+});
